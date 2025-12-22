@@ -1,0 +1,151 @@
+{
+  "$schema": "https://opencode.ai/schema/opencode.json",
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "small_model": "anthropic/claude-3-5-haiku-20241022",
+  "agent": {
+    "build": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "tools": {
+        "file_edit": true,
+        "file_read": true,
+        "file_write": true,
+        "bash": true,
+        "webfetch": true
+      }
+    },
+    "plan": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "tools": {
+        "file_read": true,
+        "webfetch": true,
+        "bash": false
+      }
+    },
+    "general": {
+      "model": "anthropic/claude-sonnet-4-20250514"
+    },
+    "blockchain": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "description": "Specialized agent for Hedera blockchain operations",
+      "tools": {
+        "hedera_get_account_balance": true,
+        "hedera_get_account_info": true,
+        "hedera_create_account": true,
+        "hedera_create_token": true,
+        "hedera_transfer_token": true,
+        "hedera_associate_token": true,
+        "hedera_deploy_contract": true,
+        "hedera_call_contract": true,
+        "hedera_query_contract": true,
+        "hedera_create_topic": true,
+        "hedera_submit_message": true,
+        "hedera_get_topic_messages": true,
+        "hedera_create_file": true,
+        "hedera_get_file_contents": true,
+        "hedera_append_file": true,
+        "hedera_transfer_hbar": true,
+        "hedera_get_network_info": true
+      }
+    },
+    "data": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "description": "Data operations - MongoDB, web scraping, APIs"
+    },
+    "web": {
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "description": "Web scraping and browser automation"
+    }
+  },
+  "provider": {
+    "anthropic": {
+      "env": ["ANTHROPIC_API_KEY"]
+    },
+    "openai": {
+      "env": ["DATABUTTON_SERVICE_KEY"]
+    },
+    "huggingface": {
+      "env": ["HUGGINGFACE_TOKEN"]
+    }
+  },
+  "mcpServers": {
+    "hedera": {
+      "command": "node",
+      "args": ["./packages/mcp-servers/bin/hedera-server.js"],
+      "env": {
+        "HEDERA_NETWORK": "${HEDERA_NETWORK}",
+        "HEDERA_OPERATOR_ID": "${HEDERA_OPERATOR_ID}",
+        "HEDERA_OPERATOR_KEY": "${HEDERA_OPERATOR_KEY}"
+      }
+    },
+    "klavis-calendar": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "googlecalendar"]
+    },
+    "klavis-youtube": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "youtube"]
+    },
+    "klavis-slack": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "slack"]
+    },
+    "klavis-notion": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "notion"]
+    },
+    "klavis-linear": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "linear"]
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "mongodb": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/claude-code-mcp-mongodb", "--connection-string", "${MONGODB_URI}"]
+    }
+  },
+  "command": {
+    "blockchain": {
+      "template": "Use the blockchain agent to help with Hedera operations: ${args}",
+      "description": "Execute Hedera blockchain operations",
+      "agent": "blockchain"
+    },
+    "deploy-contract": {
+      "template": "Deploy a smart contract to Hedera: ${args}",
+      "description": "Deploy a Solidity contract to Hedera",
+      "agent": "blockchain"
+    },
+    "create-token": {
+      "template": "Create a new token on Hedera Token Service: ${args}",
+      "description": "Create a fungible or NFT token",
+      "agent": "blockchain"
+    },
+    "scrape": {
+      "template": "Use Firecrawl to scrape: ${args}",
+      "description": "Scrape web content using Firecrawl"
+    },
+    "db": {
+      "template": "Query MongoDB: ${args}",
+      "description": "Execute MongoDB operations",
+      "agent": "data"
+    },
+    "github": {
+      "template": "GitHub operation: ${args}",
+      "description": "Interact with GitHub repos and issues"
+    }
+  },
+  "theme": "dark",
+  "autoupdate": "notify"
+}

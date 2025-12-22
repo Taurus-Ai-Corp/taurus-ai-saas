@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --border: 0 0% 14.9%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .chat-bubble {
+    @apply rounded-2xl px-4 py-3 max-w-[80%];
+  }
+
+  .chat-bubble-user {
+    @apply bg-primary text-white ml-auto;
+  }
+
+  .chat-bubble-assistant {
+    @apply bg-gray-800 text-gray-100;
+  }
+
+  .code-block {
+    @apply bg-gray-900 rounded-lg p-4 font-mono text-sm overflow-x-auto;
+  }
+
+  .tool-indicator {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .tool-running {
+    @apply bg-yellow-500/20 text-yellow-400;
+  }
+
+  .tool-completed {
+    @apply bg-green-500/20 text-green-400;
+  }
+
+  .tool-error {
+    @apply bg-red-500/20 text-red-400;
+  }
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}
+
+/* Animation for streaming text */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '▌';
+  animation: blink 1s infinite;
+  @apply text-primary;
+}

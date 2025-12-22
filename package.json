@@ -1,0 +1,43 @@
+{
+  "name": "taurus-ai-saas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Taurus AI SAAS - OpenCode AI SDK integration with blockchain support",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces --if-present",
+    "clean": "npm run clean --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "start:hedera-mcp": "node packages/mcp-servers/bin/hedera-server.js"
+  },
+  "dependencies": {
+    "@opencode-ai/sdk": "^1.0.184"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "dotenv": "^17.2.3",
+    "typescript": "^5.8.2"
+  },
+  "keywords": [
+    "taurus",
+    "ai",
+    "opencode",
+    "saas",
+    "hedera",
+    "blockchain",
+    "mcp"
+  ],
+  "author": "Taurus AI Corp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Taurus-i-Corp/taurus-ai-saas.git"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

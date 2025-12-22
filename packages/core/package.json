@@ -1,0 +1,56 @@
+{
+  "name": "@taurus-ai/core",
+  "version": "1.0.0",
+  "description": "Taurus AI Core - Shared SDK wrapper and utilities for OpenCode AI integration",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./opencode": {
+      "import": "./dist/opencode/index.js",
+      "types": "./dist/opencode/index.d.ts"
+    },
+    "./mcp": {
+      "import": "./dist/mcp/index.js",
+      "types": "./dist/mcp/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@opencode-ai/sdk": "^1.0.184"
+  },
+  "peerDependencies": {
+    "@opencode-ai/sdk": "^1.0.184"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "keywords": [
+    "taurus",
+    "ai",
+    "opencode",
+    "sdk",
+    "mcp",
+    "hedera",
+    "blockchain"
+  ],
+  "author": "Taurus AI Corp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Taurus-i-Corp/taurus-core.git"
+  }
+}

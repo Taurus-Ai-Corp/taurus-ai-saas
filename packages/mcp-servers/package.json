@@ -1,0 +1,52 @@
+{
+  "name": "@taurus-ai/mcp-servers",
+  "version": "1.0.0",
+  "description": "Taurus AI MCP Servers - Model Context Protocol servers for blockchain and external services",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "hedera-mcp-server": "./bin/hedera-server.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./hedera": {
+      "import": "./dist/hedera/index.js",
+      "types": "./dist/hedera/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "start:hedera": "node bin/hedera-server.js"
+  },
+  "dependencies": {
+    "@taurus-ai/core": "1.0.0"
+  },
+  "optionalDependencies": {
+    "@hashgraph/sdk": "^2.50.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "taurus",
+    "mcp",
+    "model-context-protocol",
+    "hedera",
+    "blockchain",
+    "ai-tools"
+  ],
+  "author": "Taurus AI Corp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Taurus-i-Corp/taurus-mcp-servers.git"
+  }
+}
