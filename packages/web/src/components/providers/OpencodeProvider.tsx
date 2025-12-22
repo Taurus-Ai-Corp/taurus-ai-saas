@@ -237,14 +237,13 @@ export function OpencodeProvider({ children }: { children: ReactNode }) {
 
   // Send message
   const sendMessage = useCallback(async (content: string) => {
-    if (!currentSession) {
+    let sessionId = currentSession?.id;
+
+    if (!sessionId) {
       // Create new session first
       const session = await createSession();
-      setCurrentSession(session);
+      sessionId = session.id;
     }
-
-    const sessionId = currentSession?.id;
-    if (!sessionId) return;
 
     // Add user message
     const userMessage: Message = {
@@ -259,15 +258,40 @@ export function OpencodeProvider({ children }: { children: ReactNode }) {
     setStreamingContent('');
 
     try {
-      await fetch(`${API_URL}/api/session/${sessionId}/prompt`, {
+      const res = await fetch(`${API_URL}/api/session/${sessionId}/prompt`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           parts: [{ type: 'text', text: content }],
         }),
       });
+
+      // Handle synchronous response (standalone mode)
+      if (res.ok) {
+        const data = await res.json();
+        if (data.parts) {
+          const assistantContent = data.parts
+            .filter((p: any) => p.type === 'text')
+            .map((p: any) => p.text)
+            .join('');
+
+          if (assistantContent) {
+            setMessages((prev) => [
+              ...prev,
+              {
+                id: data.info?.id || Date.now().toString(),
+                role: 'assistant',
+                content: assistantContent,
+                timestamp: Date.now(),
+                status: 'completed',
+              },
+            ]);
+          }
+        }
+      }
     } catch (err) {
       console.error('Failed to send message:', err);
+    } finally {
       setIsLoading(false);
     }
   }, [currentSession, createSession]);

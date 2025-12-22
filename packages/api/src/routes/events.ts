@@ -23,6 +23,20 @@ export const eventRoutes: FastifyPluginAsync = async (fastify) => {
       // Send initial connection event
       reply.raw.write(`data: ${JSON.stringify({ type: 'connected', sessionId })}\n\n`);
 
+      // In standalone mode, just keep connection alive with heartbeat
+      if (fastify.opencode.isStandaloneMode()) {
+        const heartbeat = setInterval(() => {
+          reply.raw.write(`data: ${JSON.stringify({ type: 'heartbeat' })}\n\n`);
+        }, 30000);
+
+        request.raw.on('close', () => {
+          clearInterval(heartbeat);
+          reply.raw.end();
+        });
+
+        return;
+      }
+
       try {
         // Subscribe to OpenCode events
         const stream = await fastify.opencode.subscribeToEvents();
@@ -61,6 +75,20 @@ export const eventRoutes: FastifyPluginAsync = async (fastify) => {
 
     // Send initial connection event
     reply.raw.write(`data: ${JSON.stringify({ type: 'connected' })}\n\n`);
+
+    // In standalone mode, just keep connection alive with heartbeat
+    if (fastify.opencode.isStandaloneMode()) {
+      const heartbeat = setInterval(() => {
+        reply.raw.write(`data: ${JSON.stringify({ type: 'heartbeat' })}\n\n`);
+      }, 30000);
+
+      request.raw.on('close', () => {
+        clearInterval(heartbeat);
+        reply.raw.end();
+      });
+
+      return;
+    }
 
     try {
       const stream = await fastify.opencode.subscribeToEvents();

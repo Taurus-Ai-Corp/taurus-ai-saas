@@ -67,8 +67,9 @@
       "env": ["HUGGINGFACE_TOKEN"]
     }
   },
-  "mcpServers": {
+  "mcp": {
     "hedera": {
+      "type": "local",
       "command": "node",
       "args": ["./packages/mcp-servers/bin/hedera-server.js"],
       "env": {
@@ -78,26 +79,32 @@
       }
     },
     "klavis-calendar": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "googlecalendar"]
     },
     "klavis-youtube": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "youtube"]
     },
     "klavis-slack": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "slack"]
     },
     "klavis-notion": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "notion"]
     },
     "klavis-linear": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "linear"]
     },
     "firecrawl": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "firecrawl-mcp"],
       "env": {
@@ -105,6 +112,7 @@
       }
     },
     "github": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
@@ -112,6 +120,7 @@
       }
     },
     "mongodb": {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@anthropic-ai/claude-code-mcp-mongodb", "--connection-string", "${MONGODB_URI}"]
     }
