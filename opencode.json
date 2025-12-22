@@ -70,59 +70,15 @@
   "mcp": {
     "hedera": {
       "type": "local",
-      "command": "node",
-      "args": ["./packages/mcp-servers/bin/hedera-server.js"],
-      "env": {
-        "HEDERA_NETWORK": "${HEDERA_NETWORK}",
-        "HEDERA_OPERATOR_ID": "${HEDERA_OPERATOR_ID}",
-        "HEDERA_OPERATOR_KEY": "${HEDERA_OPERATOR_KEY}"
-      }
-    },
-    "klavis-calendar": {
-      "type": "local",
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "googlecalendar"]
-    },
-    "klavis-youtube": {
-      "type": "local",
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "youtube"]
-    },
-    "klavis-slack": {
-      "type": "local",
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "slack"]
-    },
-    "klavis-notion": {
-      "type": "local",
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "notion"]
-    },
-    "klavis-linear": {
-      "type": "local",
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/claude-code-mcp-klavis", "--api-key", "${KLAVIS_API_KEY}", "--tools", "linear"]
+      "command": ["node", "./packages/mcp-servers/bin/hedera-server.js"]
     },
     "firecrawl": {
       "type": "local",
-      "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
-      "env": {
-        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
-      }
+      "command": ["npx", "-y", "firecrawl-mcp"]
     },
     "github": {
       "type": "local",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      }
-    },
-    "mongodb": {
-      "type": "local",
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/claude-code-mcp-mongodb", "--connection-string", "${MONGODB_URI}"]
+      "command": ["npx", "-y", "@modelcontextprotocol/server-github"]
     }
   },
   "command": {
