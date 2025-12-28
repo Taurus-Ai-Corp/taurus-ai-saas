@@ -1,6 +1,23 @@
+<!-- TAURUS AI Badges -->
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/Taurus-Ai-Corp?style=flat-square&logo=github&color=EA4AAA)](https://github.com/sponsors/Taurus-Ai-Corp)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![Website](https://img.shields.io/badge/Website-taurusai.io-green?style=flat-square)](https://taurusai.io)
+[![TypeScript](https://img.shields.io/badge/TypeScript-91%25-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+<!-- /TAURUS AI Badges -->
+
 # Taurus AI SAAS
 
-A full-stack AI platform powered by OpenCode AI SDK with Hedera blockchain integration.
+> Full-stack AI platform powered by OpenCode AI SDK with Hedera blockchain integration
+
+[![Stars](https://img.shields.io/github/stars/Taurus-Ai-Corp/taurus-ai-saas?style=social)](https://github.com/Taurus-Ai-Corp/taurus-ai-saas)
+
+## Features
+
+- **AI Chat** - Interactive conversations with Claude via OpenCode SDK
+- **Session Management** - Persistent chat sessions with context preservation
+- **Hedera Blockchain** - 17 MCP tools for accounts, tokens, contracts, consensus
+- **Multi-Platform** - Web app, API server, and CLI
+- **Real-time Streaming** - SSE-based message streaming
 
 ## Architecture
 
@@ -15,14 +32,6 @@ taurus-ai-saas/
 ├── docker-compose.yml  # Container deployment
 └── opencode.json       # MCP server configuration
 ```
-
-## Features
-
-- **AI Chat** - Interactive conversations with Claude via OpenCode SDK
-- **Session Management** - Persistent chat sessions with context preservation
-- **Hedera Blockchain** - 17 MCP tools for accounts, tokens, contracts, consensus
-- **Multi-Platform** - Web app, API server, and CLI
-- **Real-time Streaming** - SSE-based message streaming
 
 ## Quick Start
 
@@ -68,134 +77,56 @@ cd packages/web && npm run dev
 cd packages/cli && npm run dev -- chat
 ```
 
-## Packages
-
-### @taurus-ai/core
-
-Shared SDK wrapper with Hedera MCP server bridge.
-
-```typescript
-import { HederaMCPServer } from '@taurus-ai/core';
-
-const server = new HederaMCPServer({
-  network: 'testnet',
-  operatorId: '0.0.xxxxx',
-  operatorKey: '302e...'
-});
-```
-
-### @taurus-ai/api
-
-Fastify backend with session management and SSE streaming.
-
-**Endpoints:**
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/health` | Health check |
-| GET | `/api/session` | List sessions |
-| POST | `/api/session` | Create session |
-| GET | `/api/session/:id` | Get session |
-| DELETE | `/api/session/:id` | Delete session |
-| POST | `/api/session/:id/prompt` | Send message |
-| GET | `/api/session/:id/events` | SSE stream |
-
-### @taurus-ai/web
-
-Next.js 15 chat interface with React 19 and Zustand state management.
-
-- Real-time chat with streaming responses
-- Session sidebar with history
-- Dark mode UI
-
-### @taurus-ai/cli
-
-Command-line interface for terminal-based chat.
-
-```bash
-# Interactive chat
-taurus chat
-
-# Resume session
-taurus chat --session <id>
-
-# Quick prompt
-taurus ask "What is 2+2?"
-
-# Session management
-taurus session list
-taurus session show --id <id>
-taurus session delete --id <id>
-
-# Configuration
-taurus config show
-taurus config set --key apiUrl --value http://localhost:3001
-```
-
 ## Hedera MCP Tools
 
-The platform includes 17 blockchain tools via MCP:
+17 blockchain tools available:
 
-**Account Operations**
-- `hedera_get_account_balance` - Get HBAR balance
-- `hedera_get_account_info` - Get account details
-- `hedera_create_account` - Create new account
+| Category | Tools |
+|----------|-------|
+| **Accounts** | Balance queries, account creation |
+| **Tokens** | Fungible token creation, transfers, minting |
+| **Smart Contracts** | Deployment, execution, state queries |
+| **Consensus** | HCS topic creation and messaging |
+| **Files** | Network file operations |
 
-**Token Operations**
-- `hedera_create_token` - Create fungible token
-- `hedera_get_token_info` - Get token details
-- `hedera_transfer_token` - Transfer tokens
-- `hedera_associate_token` - Associate token with account
-- `hedera_mint_token` - Mint additional tokens
+## API Endpoints
 
-**Smart Contracts**
-- `hedera_deploy_contract` - Deploy smart contract
-- `hedera_call_contract` - Execute contract function
-- `hedera_query_contract` - Query contract state
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/session` | POST | Create new chat session |
+| `/api/session/:id/prompt` | POST | Send message |
+| `/api/session/:id/events` | GET | SSE stream |
 
-**Consensus Service**
-- `hedera_create_topic` - Create HCS topic
-- `hedera_submit_message` - Submit message to topic
-- `hedera_get_topic_info` - Get topic details
-- `hedera_get_topic_messages` - Get topic messages
+## Tech Stack
 
-**File Service**
-- `hedera_create_file` - Create file on network
-- `hedera_get_file_contents` - Read file contents
-
-## Docker Deployment
-
-```bash
-# Build and run
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-```
-
-## Development
-
-```bash
-# Type checking
-npm run typecheck
-
-# Build all packages
-npm run build
-
-# Run tests
-npm test
-```
-
-## License
-
-MIT
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+- **Frontend**: Next.js 15, React 19, Zustand
+- **Backend**: Fastify, SSE
+- **Blockchain**: Hedera Hashgraph SDK
+- **AI**: Claude via OpenCode SDK
+- **Infrastructure**: Docker, pnpm workspaces
 
 ---
 
-Built by [Taurus AI Corp](https://github.com/Taurus-Ai-Corp)
+## 💖 Support This Project
+
+If you find this project useful, please consider sponsoring:
+
+[![Sponsor TAURUS AI](https://img.shields.io/badge/Sponsor-TAURUS%20AI-EA4AAA?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/Taurus-Ai-Corp)
+
+| Tier | Benefits |
+|------|----------|
+| 🌟 Supporter ($5/mo) | Name in SPONSORS.md |
+| 🥉 Bronze ($100/mo) | Logo + Priority support |
+| 🥇 Gold ($2,000/mo) | Feature priority + Dedicated support |
+
+[View all sponsorship tiers →](https://github.com/Taurus-Ai-Corp/.github/blob/main/SPONSORS.md)
+
+---
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+**TAURUS AI Corp** | [Website](https://taurusai.io) | [GitHub](https://github.com/Taurus-Ai-Corp) | [Contact](mailto:admin@taurusai.io)
